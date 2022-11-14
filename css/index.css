@@ -1,0 +1,660 @@
+/* GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #717171;
+}
+
+.section {
+    padding-bottom: 75px;
+}
+
+.title {
+    font-size: 1.125rem;
+    margin-bottom: 40px;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+    color: #ec7532;
+    border-bottom: 1px solid #d8d8d8;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    background: linear-gradient(to right, #fbbd61, #ec7532);
+    width: 125px;
+    height: 4px;
+    display: block;
+    margin-top: 20px;
+}
+
+.img-fluid {
+    width: 100%;
+}
+
+::selection{
+    background-color: #ec7532;
+    color: white
+}
+/* LINE STYLE */
+.line::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    /* hướng trải màu: 
+        ro right: trái qua phải
+        to left: từ phairt qua trái
+        to bottom != to top
+
+        phụ thuộc vào hướng trải màu
+        Gt2: màu bắt đầu
+        GT3: màu kết thúc
+    */
+    background: linear-gradient(to right, #fbbd61, #ec7532);
+    display: block;
+    box-shadow: 0 0 20px 0 #fbbd61;
+    transition: all .5s;
+}
+
+.line:hover::after {
+    width: 100%;
+}
+
+.line.active::after {
+    width: 100%;
+}
+
+/* HEADER */
+header {
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header p {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+header #movieNavbar .navbar-nav {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header #movieNavbar .navbar-nav .nav-link {
+    color: white;
+    letter-spacing: 3px;
+    line-height: 0.8em;
+    padding: 20px 24px;
+
+}
+
+/* HEADER FIXED */
+#headerFixed {
+    width: 100%;
+    background-color: #101010;
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    transform: translate(-50%, -100%);
+    transition: transform .5s;
+}
+
+/* CAROUSEL */
+#carouselMovie{
+    height: 650px;
+}
+
+#carouselMovie .carousel-inner{
+    height: 100%;
+}
+
+#carouselMovie .carousel-inner .carousel-item{
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+#carouselMovie .carousel-inner .carousel-item:first-child{
+    background-image: url(../img/hero-1.jpg);
+}
+
+#carouselMovie .carousel-inner .carousel-item:nth-child(2){
+    background-image: url(../img/hero-2.jpg);
+}
+
+#carouselMovie .carousel-inner .carousel-item:nth-child(3){
+    background-image: url(../img/hero-3.jpg);
+}
+#carouselMovie .carousel-caption {
+    text-align: left;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* :first-child -> thứ tự trước, loại thẻ*/
+/* :last-of-type -> loải thẻ, thứ tự*/
+#carouselMovie .carousel-caption p:first-of-type {
+    color: #fbbd61;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    margin: 0;
+    animation-delay: 0.5s;
+}
+
+#carouselMovie .carousel-caption p:last-of-type {
+    font-size: 1.125rem;
+    margin-bottom: 20px;
+}
+
+#carouselMovie .carousel-caption h2 {
+    font-size: 3.25rem;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+/* > con truc tiep */
+.movieCarousel__trailer {
+    animation-delay: 0.5s;
+}
+
+.movieCarousel__trailer>span {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid white;
+    font-size: 0.8rem;
+    display: inline-block;
+    text-align: center;
+    line-height: 48px;
+    margin-right: 8px;
+}
+
+.movieCarousel__trailer button {
+    position: relative;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: white;
+    background: linear-gradient(to right, #fbbd61, #ec7532);
+
+    overflow: hidden;
+    outline: none;
+}
+
+.movieCarousel__trailer button:hover {
+    color: white;
+}
+
+.movieCarousel__trailer button::before {
+    content: '';
+    width: 110%;
+    height: 100%;
+    display: block;
+    background-color: #ec7532;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transform: skewX(30deg) translateX(-110%);
+    transition: all .5s;
+}
+
+.movieCarousel__trailer button:hover::before {
+    transform: skewX(30deg) translateX(-10px);
+}
+
+.movieCarousel__trailer button span {
+    /* z-index: thuoc tinh dung chung voi position */
+    position: relative;
+    z-index: 2;
+}
+
+.movieCarousel .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: transparent;
+    opacity: 1;
+    box-sizing: border-box;
+    background-clip: border-box;
+}
+
+.movieCarousel .carousel-indicators .active {
+    background-color: white;
+}
+
+.movieCarousel .carousel-indicators {
+    justify-content: flex-start;
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0 12px;
+}
+
+.movieCarousel__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, black, transparent);
+}
+
+/* NEW IN */
+.newIn__title {
+    text-align: center;
+}
+
+.newIn__title h3 {
+    font-size: 18px;
+    color: #4a4a4a;
+    margin: 1rem 0;
+}
+
+.newIn__title i {
+    color: #fbbd61;
+}
+
+.newIn__img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.newIn__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to bottom, #fbbd61, #ec7532);
+    transform: skewX(30deg) translateX(-150%);
+    transition: all .5s;
+    opacity: 0.9;
+}
+
+.newIn__img:hover .newIn__overlay {
+    transform: skewX(30deg) translateX(-30%);
+}
+
+.newIn__play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all .5s;
+}
+
+.newIn__img:hover .newIn__play {
+    opacity: 1;
+}
+
+.newIn__play i {
+    width: 80px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 80px;
+    transform: scale(1);
+    transition: all .5s;
+}
+
+.newIn__play i:hover {
+    transform: scale(0.9);
+}
+
+.newIn__play a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 4px;
+    display: block;
+    margin: 1rem 0;
+}
+
+.newIn__play p {
+    color: white;
+}
+
+/* SHOW TIME */
+.showTime .nav-tabs .nav-item.show .nav-link,
+.showTime .nav-tabs .nav-link.active {
+    border: none;
+}
+
+.showTime .nav-tabs .nav-link {
+    border: none;
+    padding: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #4a4a4a;
+}
+
+.showTime .nav-tabs .nav-link.active {
+    color: #ec7532;
+}
+
+.showTime .nav-tabs .nav-link span {
+    padding: 16px 30px;
+    display: block;
+}
+
+#myTabContent .tab-pane .container__row:last-child{
+    border: none;
+}
+
+.container__row {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.container__row img {
+    border-radius: 10px;
+}
+
+.container__row div p:first-of-type {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #ec7532;
+    margin: 0;
+}
+
+.container__row div h3 {
+    font-size: 24px;
+    font-weight: 300;
+    color: #101010;
+    letter-spacing: 1px;
+}
+
+.container__row a {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ec7532;
+    text-decoration: none;
+    transition: all .5s;
+}
+
+.container__row a:hover {
+    color: #101010;
+}
+
+.showTime__viewing {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: #4a4a4a;
+}
+
+.showTime__viewing button {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #717171;
+    background-color: #d8d8d8;
+}
+
+.showTime__mins span:last-child {
+    width: 33px;
+    height: 33px;
+    display: inline-block;
+    line-height: 33px;
+    color: white;
+    text-align: center;
+    background-color: #4a4a4a;
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+/* COMING SOON */
+.comingSoon.section{
+    padding-top: 75px;
+}
+.comingSoon{
+    background: #101010 url(../img/slide-3.png);
+    background-size: cover;
+    color: white;
+}
+
+.comingSoon .title{
+    color: white;
+    border-color: #333;
+}
+
+.comingSoon .row__content1 p:first-of-type{
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #ec7532;
+}
+
+.comingSoon .row__content1 h3{
+    font-size: 34px;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.comingSoon .row__content1 div>i{
+    color: #fbbd61;
+}
+
+.comingSoon .row__content1 p:last-of-type{
+    margin: 1rem 0;
+}
+
+.comingSoon .row__content1 a{
+    font-size: 12px;
+    text-decoration: none;
+    color: #ec7532;
+    letter-spacing: 4px;
+    transition: all .5s;
+}
+
+.comingSoon .row__content1 a:hover{
+    color: white;
+}
+
+.row__content2{
+    position: relative;
+}
+
+.row__content2 i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border: 1px solid #ec7532;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 25px;
+    transition: all .5s;
+    color: white;
+}
+
+.row__content2 .comingSoon__video:hover i{
+    transform: translate(-50%, -50%) scale(0.9);
+}
+/* MOVIE LIST */
+.movieList.section{
+    padding-top: 75px;
+}
+
+.movieList{
+    background-color: #101010;
+}
+
+.movieList__item{
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.movieList__overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background-color: #101010;
+    transition: all .5s;
+}
+
+.movieList__item:hover .movieList__overlay {
+    opacity: 0;
+}
+/* CONTACT */
+.contact.section{
+    padding-top: 75px;
+}
+
+.contact__content{
+    text-align: center;
+}
+
+.contact__content p:first-child{
+    font-size: 23px;
+    color: #4a4a4a;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+.contact__content a{
+    font-size: 46px;
+    color: #fbbd61;
+    text-decoration: none;
+}
+/* FOOTER */
+footer .section{
+    padding-top: 75px;
+}
+footer{
+    background-color: #101010;
+}
+
+footer h3{
+    font-size: 16px;
+    color: #ec7532;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+footer ul{
+    padding-left: 0;
+}
+
+footer li{
+    list-style: none;
+}
+
+footer a{
+    font-size: 13px;
+    text-decoration: none;
+    color: white;
+    padding: 3px 0;
+    letter-spacing: 1.5px;
+    transition: all .5s;
+}
+
+footer a:hover{
+    color: #fbbd61;
+}
+
+.footer__copyright{
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 0;
+    color: white;
+}
+
+.footer__copyright p{
+    margin-bottom: 0;
+}
+
+/* ====================== RESPONSIVE =========================== */
+@media screen and (max-width: 991.98px){
+    /* HEADER */
+    header .navbar-brand{
+        max-width: 180px;
+    }
+
+    header .navbar-brand img{
+        max-width: 180px;
+    }
+
+    #movieNavbar .navbar-nav .nav-link{
+        font-size: 14px;
+        padding: 20px 7px !important;
+        letter-spacing: 2px !important;
+    }
+
+     /* SHOW TIMES */
+    .showTime .nav-tabs .nav-link span{
+        padding: 16px 25px;
+    }
+}
+
+@media screen and (max-width: 767.98px){
+    /* GLOBAL */
+    .line.active::after {
+        width: 0;
+    }
+
+    /* HEADER */
+    header .navbar-toggler{
+        color: #fbbd61;
+    }
+
+    header .navbar-toggler:focus{
+        outline: none;
+        box-shadow: none;
+    }
+
+    #movieNavbar .navbar-nav{
+        background-color: rgba(0, 0, 0, .9);
+        text-align: center;
+    }
+
+    #movieNavbar .navbar-nav .active .nav-link{
+        color: #ec7532;
+    }
+
+    /* CAROUSEL */
+    #carouselMovie .carousel-item .carousel-caption h2{
+        font-size: 2.5rem;
+    }
+
+    /* SHOW TIMES */
+    .showTime .nav-tabs .nav-link{
+        font-size: 16px;
+    }
+    .showTime .nav-tabs .nav-link span{
+        padding: 10px 18px;
+    }
+    .showTime .img-fluid{
+        width: 30%;
+    }
+}
